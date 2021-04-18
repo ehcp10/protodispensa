@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+option go_package = "protodispensa/dispensa";
+
+message Categoria {
+    int64 id = 1;
+    string nome = 2;
+    int64 quantidadeMax = 3;
+    int64 quantidadeMin = 4;
+}
+
+message BuscarUmaCategoriaPeloId {
+    int64 id = 1;
+}
+
+message BuscarUmaCategoriaPeloNome {
+    string nome = 1;
+}
+
+message BuscarUmaCategoriaPeloIdENome {
+    int64 id = 1;
+    string nome = 2;
+}
+
+message RetornoDeCategoriaSimples {
+    int64 id = 1;
+    string nome = 2;
+}
+
+message RetornoDeCategoriaCompleto {
+    int64 id = 1;
+    string nome = 2;
+    int64 qtd_max = 3;
+    int64 qtd_min = 4;
+}
+
+message CategoriaVazio {
+
+}
+
+service CategoriaService {
+    rpc BuscaDeCategoriaPorId(BuscarUmaCategoriaPeloId) returns (RetornoDeCategoriaCompleto);
+    rpc BuscaDeCategoriaPorNome(BuscarUmaCategoriaPeloNome) returns (RetornoDeCategoriaCompleto);
+    rpc CadastraCategoria(Categoria) returns (CategoriaVazio) ;
+    rpc DeletarCategoria(BuscarUmaCategoriaPeloId) returns (CategoriaVazio);
+    rpc EditarCategoria(Categoria) returns (CategoriaVazio);
+}

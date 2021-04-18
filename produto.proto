@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+option go_package = "protodispensa/dispensa";
+
+message Produto {
+    int64 id = 1;
+    string nome = 2;
+    int64 data_de_vencimento = 3;
+    int64 categoria = 4;
+}
+
+message BuscaDeProdutoPorId {
+    int64 id = 1;
+}
+
+message BuscaDeProdutoPorNome {
+    string nome = 1;
+}
+
+message BuscaDeProdutosPorCategoria {
+    int64 categoria = 1;
+}
+
+message RetornoDeProduto {
+    int64 id = 1;
+    string nome = 2;
+    int64 data_de_vencimento = 3;
+    int64 categoria = 4;
+}
+
+message ListaDeProdutos {
+    repeated RetornoDeProduto lista = 1;
+}
+
+message ProdutoVazio {
+
+}
+
+service ProdutoService {
+    rpc BuscaUmProdutoPorId(BuscaDeProdutoPorId) returns (RetornoDeProduto);
+    rpc BuscaUmProduroPorNome(BuscaDeProdutoPorNome) returns (RetornoDeProduto);
+    rpc BuscaTodosOsProdutosDaCategoria(BuscaDeProdutosPorCategoria) returns (ListaDeProdutos);
+    rpc CriarProduto(Produto) returns (ProdutoVazio);
+    rpc EditarProduto(Produto) returns (ProdutoVazio);
+    rpc DeletarProduto(BuscaDeProdutoPorId) returns (ProdutoVazio);
+} 
