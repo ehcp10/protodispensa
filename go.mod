@@ -1,4 +1,4 @@
-module github.com/ehcp10/dispensa
+module github.com/ehcp10/protodispensa
 
 go 1.16
 
